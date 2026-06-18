@@ -207,9 +207,6 @@ func _update_player_awareness(delta: float) -> void:
 	if player_awareness.ratio >= 1.0:
 		state = State.ALERTED
 		player_detected.emit(_player)
-		# --- Lineas para que el player pierda---
-		if _player is Player:
-			_player.defeat()
 
 
 func _update_animation() -> void:
@@ -464,9 +461,6 @@ func _set_alert_other_sound_stream(new_value: AudioStream) -> void:
 func _on_instant_detection_area_body_entered(body: Node2D) -> void:
 	state = State.ALERTED
 	player_detected.emit(body)
-	#--Lineas si player toca a la sombra mure--
-	if body is Player:
-		body.defeat()
 
 
 func _on_detection_area_body_entered(body: Node2D) -> void:
@@ -476,7 +470,6 @@ func _on_detection_area_body_entered(body: Node2D) -> void:
 	if player_instantly_detected_on_sight:
 		state = State.ALERTED
 		player_detected.emit(_player)
-		
 	else:
 		state = State.DETECTING
 
